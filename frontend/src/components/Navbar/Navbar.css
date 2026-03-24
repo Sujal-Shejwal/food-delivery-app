@@ -1,0 +1,231 @@
+.navbar {
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid #f1f1f1;
+
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ================= LOGO ================= */
+.navbar .logo {
+    width: 220px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.navbar .logo:hover {
+    transform: scale(1.05);
+}
+
+/* ================= MENU ================= */
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    color: #49557e;
+    font-size: 16px;
+}
+
+/* Each item */
+.navbar-menu li {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Links */
+.navbar-menu a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+/* 🔥 Hover Effect */
+.navbar-menu li:hover a {
+    color: tomato;
+    transform: translateY(-2px);
+}
+
+/* 🔥 Underline Animation */
+.navbar-menu li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background-color: tomato;
+    transition: 0.3s ease;
+}
+
+.navbar-menu li:hover::after {
+    width: 100%;
+}
+
+/* ================= ACTIVE (CLICKED) ================= */
+.navbar-menu .active {
+    color: tomato;
+    position: relative;
+}
+
+/* Persistent underline */
+.navbar-menu .active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: tomato;
+}
+
+/* ================= RIGHT ================= */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar-right img {
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.navbar-right img:hover {
+    transform: scale(1.15);
+}
+
+/* Button */
+.navbar button {
+    background: transparent;
+    font-size: 14px;
+    color: #49557e;
+    border: 1px solid tomato;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.navbar button:hover {
+    background-color: #fff4f2;
+    color: tomato;
+}
+
+/* ================= SEARCH DOT ================= */
+.navbar-search-icon {
+    position: relative;
+}
+
+.navbar-search-icon .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: tomato;
+    border-radius: 50%;
+    top: -3px;
+    right: -3px;
+}
+
+/* ================= PROFILE ================= */
+.navbar-profile {
+    position: relative;
+}
+
+.navbar-profile-dropdown {
+    position: absolute;
+    display: none;
+    right: 0;
+    z-index: 1;
+}
+
+.navbar-profile:hover .navbar-profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff2ef;
+    padding: 12px 25px;
+    border-radius: 6px;
+    border: 1px solid tomato;
+    list-style: none;
+}
+
+/* Dropdown items */
+.navbar-profile-dropdown li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.navbar-profile-dropdown li:hover {
+    color: tomato;
+    transform: translateX(5px);
+}
+
+.navbar-profile-dropdown img {
+    width: 20px;
+}
+
+/* ================= TABLET ================= */
+@media (max-width:1050px) {
+
+    .navbar {
+        padding: 18px 15px;
+    }
+
+    .navbar-menu {
+        gap: 20px;
+        font-size: 15px;
+    }
+
+    .navbar-right {
+        gap: 18px;
+    }
+
+    .navbar-right img {
+        width: 22px;
+    }
+
+    .navbar button {
+        padding: 6px 16px;
+        font-size: 13px;
+    }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:750px) {
+
+    .navbar {
+        padding: 15px;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+    .navbar .logo {
+        width: 130px;
+    }
+
+    .navbar-right {
+        gap: 12px;
+    }
+
+    .navbar-right img {
+        width: 18px;
+    }
+
+    .navbar button {
+        padding: 5px 12px;
+        font-size: 12px;
+    }
+}

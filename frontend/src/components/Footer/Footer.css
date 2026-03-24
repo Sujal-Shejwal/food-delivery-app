@@ -1,0 +1,156 @@
+.footer {
+    color: #d9d9d9;
+    background-color: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 8vw;
+    padding-top: 80px;
+    margin-top: 100px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ================== GRID ================== */
+.footer-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 80px;
+}
+
+/* ================== SECTIONS ================== */
+.footer-content-left,
+.footer-content-right,
+.footer-content-center {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* ================== LOGO ================== */
+.footer-logo {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.footer-logo:hover {
+    transform: scale(1.05);
+}
+
+/* ================== LIST ITEMS ================== */
+.footer-content-left li,
+.footer-content-right li,
+.footer-content-center li {
+    list-style: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Hover Effect */
+.footer-content-left li:hover,
+.footer-content-right li:hover,
+.footer-content-center li:hover {
+    color: #ff4d4d;
+    transform: translateX(6px);
+}
+
+/* Underline Animation */
+.footer-content-left li::after,
+.footer-content-right li::after,
+.footer-content-center li::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -2px;
+    background-color: #ff4d4d;
+    transition: 0.3s ease;
+}
+
+.footer-content-left li:hover::after,
+.footer-content-right li:hover::after,
+.footer-content-center li:hover::after {
+    width: 100%;
+}
+
+/* ================== HEADINGS ================== */
+.footer-content-right h2,
+.footer-content-center h2 {
+    color: white;
+    transition: 0.3s;
+}
+
+.footer-content-right h2:hover,
+.footer-content-center h2:hover {
+    color: #ff4d4d;
+}
+
+/* ================== SOCIAL ICONS ================== */
+.footer-social-icons img {
+    width: 35px;
+    margin-right: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.footer-social-icons img:hover {
+    transform: scale(1.2);
+    background-color: #ff4d4d;
+}
+
+/* ================== DIVIDER ================== */
+.footer hr {
+    width: 100%;
+    height: 1px;
+    margin: 20px 0;
+    background-color: #444;
+    border: none;
+}
+
+/* ================== COPYRIGHT ================== */
+.footer p {
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* ================== TABLET ================== */
+@media (max-width: 1050px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+/* ================== MOBILE ================== */
+@media (max-width: 750px) {
+
+    .footer {
+        padding: 40px 20px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-content-left,
+    .footer-content-center,
+    .footer-content-right {
+        align-items: flex-start;
+    }
+
+    .footer-logo {
+        width: 180px;
+    }
+}

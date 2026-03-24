@@ -1,0 +1,142 @@
+.explore-menu{
+    max-width: 1100px;
+    margin: 80px auto 40px auto;   /* ✅ more top spacing */
+    padding: 40px 15px 20px;       /* ✅ inner spacing */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+/* ================= HEADING ================= */
+.explore-menu h1{
+    color: #262626;
+    font-weight: 600;
+    font-size: 32px;
+}
+
+/* ================= TEXT ================= */
+.explore-menu-text {
+    max-width: 650px;
+    color: #808080;
+    line-height: 1.6;
+    margin: 0 auto;   /* ✅ center paragraph */
+}
+
+/* ================= LIST ================= */
+.explore-menu-list{
+    display: flex;
+    justify-content: center;   /* ✅ center items */
+    align-items: center;
+    gap: 30px;
+    margin: 25px 0px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+}
+
+/* Hide scrollbar */
+.explore-menu-list::-webkit-scrollbar {
+    display: none;
+}
+
+/* ================= ITEM ================= */
+.explore-menu-list-item{
+    width: 95px;
+    min-width: 95px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* ✅ center content */
+}
+
+/* ================= IMAGE ================= */
+.explore-menu-list-item img{
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+.explore-menu-list-item img:hover{
+    transform: scale(1.1);
+}
+
+/* Active state */
+.explore-menu-list-item .active{
+    border: 3px solid tomato;
+    padding: 3px;
+    border-radius: 50%;
+}
+
+/* ================= TEXT ================= */
+.explore-menu-list-item p{
+    margin-top: 10px;
+    color: #747474;
+    font-size: 14px;
+}
+
+/* ================= DIVIDER ================= */
+.explore-menu hr{
+    margin: 20px 0px;
+    height: 2px;
+    background-color: #e2e2e2;
+    border: none;
+}
+
+/* ================= TABLET ================= */
+@media (max-width:1050px){
+
+    .explore-menu{
+        padding: 0 5vw;
+    }
+
+    .explore-menu h1{
+        font-size: 26px;
+    }
+
+    .explore-menu-text{
+        max-width: 100%;
+        font-size: 14px;
+    }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:750px){
+
+    .explore-menu{
+        padding: 0 20px;
+    }
+
+    .explore-menu h1{
+        font-size: 22px;
+    }
+
+    .explore-menu-text{
+        font-size: 13px;
+    }
+
+    .explore-menu-list{
+        gap: 20px;
+        justify-content: flex-start; /* ✅ better mobile scroll */
+    }
+
+    .explore-menu-list-item{
+        width: 75px;
+        min-width: 75px;
+    }
+
+    .explore-menu-list-item p{
+        font-size: 12px;
+    }
+
+    .explore-menu-list-item img{
+        width: 70px;
+        height: 70px;
+    }
+}

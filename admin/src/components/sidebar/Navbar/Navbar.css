@@ -1,0 +1,21 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid #eee;
+    background-color: white;
+}
+
+/* ✅ LOGO SIZE */
+.logo {
+    width: 200px;   /* 🔥 perfect admin size */
+    height: auto;
+    object-fit: contain;
+}
+
+/* Profile image */
+.profile {
+    width: 90px;
+    border-radius: 50%;
+}

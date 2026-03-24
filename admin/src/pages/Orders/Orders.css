@@ -1,0 +1,70 @@
+.order-item{
+    display: grid;
+    grid-template-columns: 80px 2fr 1fr;   /* ✅ FIXED layout */
+    align-items: start;
+    gap: 30px;
+    border: 1px solid tomato;
+    padding: 20px;
+    margin: 30px 0px;
+    font-size: 14px;
+    color: #505050;
+    border-radius: 8px;                   /* ✅ better UI */
+    background-color: #fff;
+}
+
+/* 📦 IMAGE */
+.order-item img{
+    width: 50px;
+}
+
+/* 🍔 FOOD + NAME */
+.order-item-food, 
+.order-item-name{
+    font-weight: 600;
+}
+
+.order-item-name{
+    margin-top: 10px;        /* ✅ fixed spacing */
+    margin-bottom: 5px;
+}
+
+/* 📍 ADDRESS */
+.order-item-address{
+    margin-bottom: 10px;
+    line-height: 1.4;        /* ✅ readability */
+}
+
+/* 👉 RIGHT SIDE ALIGNMENT */
+.order-item > div:last-child{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+/* 🔽 DROPDOWN */
+.order-item select {
+    background-color: #ffe8e4;
+    border: 1px solid tomato;
+    width: max(10vw,120px);
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;      /* ✅ better look */
+    cursor: pointer;
+}
+
+/* 🔥 HOVER EFFECT */
+.order-item:hover{
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+@media (max-width:1000px) {
+    .order-item{
+        font-size: 12px;
+        grid-template-columns: 0.5fr 2fr 1fr;
+        padding: 12px;
+    }
+    .order-item img{
+        width: 40px;
+    }
+}
