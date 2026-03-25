@@ -7,27 +7,20 @@ import { StoreContext } from '../../context/StoreContext';
 const Verify = () => {
 
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-
   const success = searchParams.get("success");
   const orderId = searchParams.get("orderId");
 
   const { url } = useContext(StoreContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
 
     const verifyPayment = async () => {
       try {
-        console.log("VERIFY PARAMS:", { success, orderId });
 
-        // ✅ Safety check
-        if (!success || !orderId) {
-          console.log("Missing params");
-          navigate("/");
-          return;
-        }
+        console.log("VERIFY DATA:", success, orderId);
+        console.log("API URL:", url);
 
-        // ✅ API call
         const response = await axios.post(
           `${url}/api/order/verify`,
           {
@@ -38,7 +31,6 @@ const Verify = () => {
 
         console.log("VERIFY RESPONSE:", response.data);
 
-        // ✅ Navigation
         if (response.data.success) {
           navigate("/myorders");
         } else {
@@ -51,12 +43,18 @@ const Verify = () => {
       }
     };
 
-    verifyPayment();
+    // 🚨 IMPORTANT CHECK
+    if (success && orderId) {
+      verifyPayment();
+    } else {
+      console.log("Missing params");
+      navigate("/");
+    }
 
-  }, []);
+  }, [success, orderId, url, navigate]);
 
   return (
-    <div className='verify' style={{ textAlign: "center", marginTop: "100px" }}>
+    <div className='verify'>
       <h2>Verifying Payment...</h2>
     </div>
   )
