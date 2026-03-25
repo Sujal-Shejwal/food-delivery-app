@@ -5,11 +5,12 @@ import multer from "multer"
 const foodRouter = express.Router();
 
 // Image storage engine 
-
 const storage = multer.diskStorage({
-    destination: "uploads",
+    destination: (req, file, cb) => {
+        cb(null, "uploads/");   // ✅ fix
+    },
     filename: (req, file, cb) => {
-        return cb(null, `${Date.now()}${file.originalname}`)
+        return cb(null, `${Date.now()}-${file.originalname}`)
     }
 })
 

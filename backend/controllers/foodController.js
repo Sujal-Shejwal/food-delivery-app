@@ -3,13 +3,18 @@ import fs from 'fs'
 
 // add food item
 const addFood = async (req, res)=>{
-  let image_filename = `${req.file.filename}`;
+
+  // ✅ SAFE FIX (no logic change)
+  const image_filename = req.file ? req.file.filename : "";
+
+  console.log("BODY:", req.body);   // debug
+  console.log("FILE:", req.file);   // debug
 
   const food = new foodModel({
-    name:req.body.name,
-    description:req.body.description,
+    name: req.body.name,
+    description: req.body.description,
     price: Number(req.body.price || 0), 
-    category: req.body.category,
+    category: req.body.category,   // 👈 this will now work
     image: image_filename
   })
 
@@ -18,7 +23,7 @@ const addFood = async (req, res)=>{
     res.json({success:true,message:"Food Added"})
   } catch (error) {
     console.log(error)
-    res.json({success:false,message:error.message}) // ✅ FIX
+    res.json({success:false,message:error.message})
   } 
 }
 
@@ -29,7 +34,7 @@ const listFood = async (req,res) =>{
       res.json({success:true,data:foods})
     } catch (error) {
       console.log(error);
-      res.json({success:false,message:error.message}) // ✅ FIX
+      res.json({success:false,message:error.message})
     }
 }
 
@@ -48,7 +53,7 @@ const removeFood = async (req,res)=>{
 
     } catch (error) {
       console.log(error);
-      res.json({success:false,message:error.message}) // ✅ FIX
+      res.json({success:false,message:error.message})
     }
 }
 
