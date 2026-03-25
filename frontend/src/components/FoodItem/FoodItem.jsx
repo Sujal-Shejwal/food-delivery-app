@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./FoodItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
@@ -7,16 +7,20 @@ const FoodItem = ({ id, name, price, description, image }) => {
 
   const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
 
-  // ✅ MAIN FIX (REMOVE ITEMS WITHOUT IMAGE)
-  if (!id || !image) return null;
+  const [imgError, setImgError] = useState(false);
+
+  // ❗ MAIN FIX → remove only items with broken image
+  if (!id || imgError) return null;
 
   return (
     <div className="food-item">
       <div className="food-item-img-container">
+
         <img 
           className="food-item-image" 
           src={`${url}/images/${image}`} 
           alt={name}
+          onError={() => setImgError(true)}  // 🔥 triggers removal
         />
 
         {!(cartItems?.[id] > 0) ? (

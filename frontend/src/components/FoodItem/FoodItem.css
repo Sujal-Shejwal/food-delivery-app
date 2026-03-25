@@ -7,9 +7,9 @@
     animation: fadeIn 1s;
     background: white;
 
-    display: flex;              /* IMPORTANT */
-    flex-direction: column;     /* IMPORTANT */
-    height: 100%;               /* IMPORTANT */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .food-item:hover{
@@ -23,9 +23,9 @@
 
 .food-item-info{
     padding: 20px;
-    display: flex;              /* IMPORTANT */
-    flex-direction: column;     /* IMPORTANT */
-    flex-grow: 1;               /* IMPORTANT */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .food-item-name-rating{
@@ -44,7 +44,7 @@
 .food-item-desc{
     color: #676767;
     font-size: 12px;
-    margin-bottom: auto;       /* PUSHES PRICE DOWN */
+    margin-bottom: auto;
 } 
 
 .food-item-price{
