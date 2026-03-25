@@ -10,14 +10,23 @@ import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
-// ✅ SERVE IMAGES (IMPORTANT)
+// ✅ FIXED CORS (FINAL)
+app.use(cors({
+  origin: [
+    "https://food-delivery-app-gd5y.vercel.app", // admin panel
+    "https://YOUR-FRONTEND-LINK.vercel.app"      // 👈 PUT YOUR REAL FRONTEND URL HERE
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+// ✅ SERVE IMAGES
 app.use("/images", express.static("uploads"));
 
 // db
@@ -29,10 +38,12 @@ app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
+// test route
 app.get("/", (req, res) => {
   res.send("API Working");
 });
 
+// server start
 app.listen(port, () => {
-  console.log(`Server started on http://localhost:${port}`);
+  console.log(`Server started on port ${port}`);
 });
