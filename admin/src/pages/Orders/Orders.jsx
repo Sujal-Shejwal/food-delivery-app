@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import './Orders.css'
 import { toast } from "react-toastify"
 import axios from "axios"
-import { assets } from "../../assets/assets"
+import { assets, url } from "../../assets/assets"; // ✅ FIX
 
-const Orders = ({ url }) => {
+const Orders = () => {
 
   const [orders, setOrders] = useState([]);
 
@@ -24,21 +24,13 @@ const Orders = ({ url }) => {
     }
   }
 
-  // ✅ STATUS UPDATE FUNCTION (FIXED)
   const statusHandler = async (e, orderId) => {
-    
     try {
-
       const response = await axios.post(
         url + "/api/order/status",
         {
           orderId: orderId,
           status: e.target.value
-        },
-        {
-          headers: {
-            "Content-Type": "application/json"
-          }
         }
       );
 
@@ -55,14 +47,9 @@ const Orders = ({ url }) => {
     }
   }
 
-
   useEffect(() => {
-    if (url) {
-      fetchAllOrders();
-    }
-  }, [url])
-
-   
+    fetchAllOrders();
+  }, [])
 
   return (
     <div className='order add'>
@@ -102,7 +89,6 @@ const Orders = ({ url }) => {
 
             </div>
 
-            {/* RIGHT SIDE */}
             <div>
               <p>Items: {order.items.length}</p>
               <p>₹{order.amount}</p>
