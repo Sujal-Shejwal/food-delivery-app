@@ -16,11 +16,11 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ FIXED CORS (FINAL)
+// ✅ FINAL CORS FIX
 app.use(cors({
   origin: [
-    "https://food-delivery-app-gd5y.vercel.app", // admin panel
-    "https://YOUR-FRONTEND-LINK.vercel.app"      // 👈 PUT YOUR REAL FRONTEND URL HERE
+    "https://food-delivery-app-gd5y.vercel.app",       // admin panel
+    "https://food-delivery-app-lemon-phi.vercel.app"   // frontend (NEW)
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
