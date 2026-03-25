@@ -2,12 +2,12 @@ import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 
-// ✅ Lazy Stripe Initialization (FIX)
+// ✅ Lazy Stripe Initialization
 let stripe;
 
 const getStripe = () => {
   if (!stripe) {
-    console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY); // debug check
+    console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY);
     stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   }
   return stripe;
@@ -15,9 +15,10 @@ const getStripe = () => {
 
 // placing user order
 const placeOrder = async (req, res) => {
+  const stripe = getStripe();
 
-  const stripe = getStripe(); // ✅ FIXED HERE
   const frontend_url = "https://food-delivery-app-lemon-phi.vercel.app";
+
   try {
     const newOrder = new orderModel({
       userId: req.body.userId,
@@ -51,19 +52,20 @@ const placeOrder = async (req, res) => {
       quantity: 1
     });
 
-    // create stripe session
+    // ✅ FIXED Stripe session
     const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"], // ✅ IMPORTANT FIX
       line_items,
       mode: "payment",
-      success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`, // ✅ FIXED
-      cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}` // ✅ FIXED
+      success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
+      cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`
     });
 
     res.json({ success: true, session_url: session.url });
 
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Error placing order" });
+    console.log("STRIPE ERROR:", error.message); // ✅ DEBUG
+    res.json({ success: false, message: error.message }); // ✅ SHOW REAL ERROR
   }
 };
 
