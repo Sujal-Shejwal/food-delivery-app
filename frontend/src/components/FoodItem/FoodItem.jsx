@@ -7,19 +7,23 @@ const FoodItem = ({ id, name, price, description, image }) => {
 
   const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
 
-  // ✅ extra safety (optional but good)
+  // safety
   if (!id) return null;
 
   return (
     <div className="food-item">
       <div className="food-item-img-container">
+
+        {/* ✅ ONLY FIX: hide broken image */}
         <img 
           className="food-item-image" 
-          src={url + "/images/" + image}
-          alt={name} 
+          src={`${url}/images/${image}`} 
+          alt={name}
+          onError={(e) => {
+            e.target.style.display = "none";
+          }}
         />
 
-        {/* ✅ FIXED HERE */}
         {!(cartItems?.[id] > 0) ? (
           <img
             className="add"
@@ -35,7 +39,6 @@ const FoodItem = ({ id, name, price, description, image }) => {
               alt="remove"
             />
             
-            {/* ✅ FIXED HERE */}
             <p>{cartItems?.[id] || 0}</p>
 
             <img
