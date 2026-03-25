@@ -4,12 +4,53 @@
 ![GitHub stars](https://img.shields.io/github/stars/Sujal-Shejwal/food-delivery-app?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Sujal-Shejwal/food-delivery-app?style=social)
 
+<p align="center">
+  <a href="https://food-delivery-app-lemon-phi.vercel.app">
+    <img src="https://img.shields.io/badge/🚀%20Live%20App-Open-green?style=for-the-badge" />
+  </a>
+  <a href="https://food-delivery-app-gd5y.vercel.app">
+    <img src="https://img.shields.io/badge/🛠%20Admin%20Panel-Open-blue?style=for-the-badge" />
+  </a>
+</p>
+
 ---
 
 ## 📌 Overview
 
 A **full-stack Food Delivery Web Application** built using the **MERN Stack**.
 Users can browse food items, add them to cart, place orders, and make secure payments.
+
+This project demonstrates **real-world full-stack development**, including:
+
+* Deployment (Vercel + Render)
+* API integration
+* Admin dashboard management
+* Handling production issues (CORS, routing)
+
+---
+
+## 🌐 Live Demo
+
+### 🚀 User Frontend
+
+👉 https://food-delivery-app-lemon-phi.vercel.app
+
+### 🛠 Admin Panel
+
+👉 https://food-delivery-app-gd5y.vercel.app
+
+### ⚙ Backend API
+
+👉 https://food-delivery-backend-rbic.onrender.com
+
+---
+
+## 🏗 Deployment Architecture
+
+* 🌐 Frontend → Vercel
+* 🛠 Admin Panel → Vercel
+* ⚙ Backend → Render
+* 🗄 Database → MongoDB Atlas
 
 ---
 
@@ -20,6 +61,7 @@ Users can browse food items, add them to cart, place orders, and make secure pay
 * 💳 Secure Payment Integration (Stripe)
 * 📦 Order Tracking System
 * 🧑‍💼 Admin Dashboard for managing food & orders
+* 🔄 Real-time data sync (Frontend ↔ Admin)
 * 🔔 Notifications System
 
 ---
@@ -28,7 +70,7 @@ Users can browse food items, add them to cart, place orders, and make secure pay
 
 ### 🔹 Frontend
 
-* React.js
+* React.js (Vite)
 * CSS
 * Axios
 
@@ -39,7 +81,7 @@ Users can browse food items, add them to cart, place orders, and make secure pay
 
 ### 🔹 Database
 
-* MongoDB
+* MongoDB Atlas
 
 ### 🔹 Tools & Services
 
@@ -53,9 +95,9 @@ Users can browse food items, add them to cart, place orders, and make secure pay
 ```
 Food-Delivery/
 │
-├── frontend/   # User Website
-├── backend/    # Server & APIs
-├── admin/      # Admin Dashboard
+├── frontend/   # User Website (Vercel)
+├── backend/    # Server & APIs (Render)
+├── admin/      # Admin Dashboard (Vercel)
 ```
 
 ---
@@ -130,7 +172,7 @@ npm run dev
 
 ![Cart](./screenshots/cart.png)
 
-#### Checkout (Payment)
+#### Checkout
 
 ![Checkout](./screenshots/checkout.png)
 
@@ -154,11 +196,15 @@ npm run dev
 
 ![Admin Orders](./screenshots/admin-orders.png)
 
+---
 
+## 💡 Key Highlights
 
-## 🌐 Live Demo (Coming Soon)
-
-> Will be added after deployment
+* Full-stack MERN application
+* Separate Admin & User systems
+* Production deployment (Vercel + Render)
+* Solved real-world issues (CORS, routing, API handling)
+* Scalable architecture
 
 ---
 
