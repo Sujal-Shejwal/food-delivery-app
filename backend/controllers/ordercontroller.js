@@ -17,8 +17,7 @@ const getStripe = () => {
 const placeOrder = async (req, res) => {
 
   const stripe = getStripe(); // ✅ FIXED HERE
-  const frontend_url = "http://localhost:5174";
-
+  const frontend_url = "https://food-delivery-app-lemon-phi.vercel.app";
   try {
     const newOrder = new orderModel({
       userId: req.body.userId,
