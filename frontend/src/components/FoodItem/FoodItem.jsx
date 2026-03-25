@@ -3,26 +3,18 @@ import "./FoodItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 
-const FoodItem = ({ id, name, price, description, image }) => {
+const FoodItem = ({ id, name, price, description }) => {
 
-  const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
-  // safety
+  // safety check
   if (!id) return null;
 
   return (
     <div className="food-item">
+      
+      {/* ❌ IMAGE COMPLETELY REMOVED */}
       <div className="food-item-img-container">
-
-        {/* ✅ ONLY FIX: hide broken image */}
-        <img 
-          className="food-item-image" 
-          src={`${url}/images/${image}`} 
-          alt={name}
-          onError={(e) => {
-            e.target.style.display = "none";
-          }}
-        />
 
         {!(cartItems?.[id] > 0) ? (
           <img
