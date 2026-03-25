@@ -1,24 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./FoodItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 
-const FoodItem = ({ id, name, price, description }) => {
+const FoodItem = ({ id, name, price, description, image }) => {
 
-  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
 
-  // safety check
+  const [imgError, setImgError] = useState(false); // ✅ NEW
+
   if (!id) return null;
 
   return (
     <div className="food-item">
-      
-      {/* ❌ IMAGE COMPLETELY REMOVED */}
       <div className="food-item-img-container">
+
+        {/* ✅ SHOW IMAGE ONLY IF VALID */}
+        {image && !imgError && (
+          <img
+            className="food-item-image"
+            src={`${url}/images/${image}`}
+            alt={name}
+            onError={() => setImgError(true)} // ✅ hide if broken
+          />
+        )}
 
         {!(cartItems?.[id] > 0) ? (
           <img
-            className="add"
             onClick={() => addToCart(id)}
             src={assets.add_icon_white}
             alt="add"
