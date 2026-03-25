@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./FoodItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
@@ -7,48 +7,44 @@ const FoodItem = ({ id, name, price, description, image }) => {
 
   const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
 
-  const [imgError, setImgError] = useState(false);
-
-  if (!id) return null;
+  // ✅ MAIN FIX (REMOVE ITEMS WITHOUT IMAGE)
+  if (!id || !image) return null;
 
   return (
     <div className="food-item">
+      <div className="food-item-img-container">
+        <img 
+          className="food-item-image" 
+          src={`${url}/images/${image}`} 
+          alt={name}
+        />
 
-      {/* ✅ ONLY SHOW IMAGE SECTION IF IMAGE IS VALID */}
-      {image && !imgError && (
-        <div className="food-item-img-container">
+        {!(cartItems?.[id] > 0) ? (
           <img
-            className="food-item-image"
-            src={`${url}/images/${image}`}
-            alt={name}
-            onError={() => setImgError(true)}
+            className="add"
+            onClick={() => addToCart(id)}
+            src={assets.add_icon_white}
+            alt="add"
           />
+        ) : (
+          <div className="food-item-counter">
+            <img
+              onClick={() => removeFromCart(id)}
+              src={assets.remove_icon_red}
+              alt="remove"
+            />
+            
+            <p>{cartItems?.[id] || 0}</p>
 
-          {!(cartItems?.[id] > 0) ? (
             <img
               onClick={() => addToCart(id)}
-              src={assets.add_icon_white}
+              src={assets.add_icon_green}
               alt="add"
             />
-          ) : (
-            <div className="food-item-counter">
-              <img
-                onClick={() => removeFromCart(id)}
-                src={assets.remove_icon_red}
-                alt="remove"
-              />
-              <p>{cartItems?.[id] || 0}</p>
-              <img
-                onClick={() => addToCart(id)}
-                src={assets.add_icon_green}
-                alt="add"
-              />
-            </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
 
-      {/* ✅ CONTENT ALWAYS SHOWS */}
       <div className="food-item-info">
         <div className="food-item-name-rating">
           <p>{name}</p>
