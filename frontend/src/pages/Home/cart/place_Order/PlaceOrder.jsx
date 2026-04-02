@@ -31,7 +31,6 @@ const PlaceOrder = () => {
 
     let orderItems = [];
 
-    // ✅ FIXED: safe check
     food_list.forEach((item) => {
       if (cartItems[item._id] && cartItems[item._id] > 0) {
         let itemInfo = { ...item };
@@ -40,7 +39,6 @@ const PlaceOrder = () => {
       }
     });
 
-    // ✅ BONUS: prevent empty cart order
     if (orderItems.length === 0) {
       alert("Cart is empty");
       return;
@@ -56,19 +54,31 @@ const PlaceOrder = () => {
       let response = await axios.post(
         url + "/api/order/place",
         orderData,
-        { headers: { token } }
+        {
+          headers: {
+            token: token   // ✅ explicitly passed
+          }
+        }
       );
+
+      // ✅ ADDED DEBUG
+      console.log("RESPONSE:", response.data);
 
       if (response.data.success) {
         const { session_url } = response.data;
         window.location.replace(session_url);
       } else {
+        console.log("BACKEND ERROR:", response.data);
         alert("Error placing order");
       }
 
     } catch (error) {
-      console.log(error.response?.data || error.message); // ✅ DEBUG
-      alert("Server Error");
+      // ✅ FULL DEBUG (VERY IMPORTANT)
+      console.log("FULL ERROR:", error);
+      console.log("STATUS:", error.response?.status);
+      console.log("DATA:", error.response?.data);
+
+      alert("Error placing order");
     }
   };
 
@@ -87,7 +97,6 @@ const PlaceOrder = () => {
   return (
     <form onSubmit={placeOrder} className="Place-order">
 
-      {/* LEFT SIDE */}
       <div className="Place-order-left">
         <p className="Title">Delivery Information</p> 
 
@@ -112,7 +121,6 @@ const PlaceOrder = () => {
         <input name='phone' onChange={onChangeHandler} value={data.phone} type="text" placeholder="Phone number"/>
       </div>
 
-      {/* RIGHT SIDE */}
       <div className="place-order-right"> 
         <div className="cart-total">
           <h2>Cart Totals</h2>
