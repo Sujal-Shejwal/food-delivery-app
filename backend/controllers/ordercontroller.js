@@ -21,7 +21,7 @@ const placeOrder = async (req, res) => {
 
   try {
     const newOrder = new orderModel({
-      userId: req.body.userId,
+      userId: req.userId,   // ✅ FIXED (was req.body.userId)
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address
@@ -30,7 +30,7 @@ const placeOrder = async (req, res) => {
     await newOrder.save();
 
     // clear cart
-    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+    await userModel.findByIdAndUpdate(req.userId, { cartData: {} }); // ✅ FIXED
 
     // create line items
     const line_items = req.body.items.map((item) => ({
@@ -54,7 +54,7 @@ const placeOrder = async (req, res) => {
 
     // ✅ FIXED Stripe session
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"], // ✅ IMPORTANT FIX
+      payment_method_types: ["card"],
       line_items,
       mode: "payment",
       success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
@@ -64,8 +64,8 @@ const placeOrder = async (req, res) => {
     res.json({ success: true, session_url: session.url });
 
   } catch (error) {
-    console.log("STRIPE ERROR:", error.message); // ✅ DEBUG
-    res.json({ success: false, message: error.message }); // ✅ SHOW REAL ERROR
+    console.log("STRIPE ERROR:", error.message);
+    res.json({ success: false, message: error.message });
   }
 };
 
