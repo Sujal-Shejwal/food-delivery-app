@@ -21,7 +21,7 @@ const placeOrder = async (req, res) => {
 
   try {
     const newOrder = new orderModel({
-      userId: req.userId,   // ✅ FIXED (was req.body.userId)
+      userId: req.body.userId,   // ✅ FIXED (aligned with middleware)
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address
@@ -30,7 +30,7 @@ const placeOrder = async (req, res) => {
     await newOrder.save();
 
     // clear cart
-    await userModel.findByIdAndUpdate(req.userId, { cartData: {} }); // ✅ FIXED
+    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} }); // ✅ FIXED
 
     // create line items
     const line_items = req.body.items.map((item) => ({
@@ -52,7 +52,7 @@ const placeOrder = async (req, res) => {
       quantity: 1
     });
 
-    // ✅ FIXED Stripe session
+    // Stripe session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
